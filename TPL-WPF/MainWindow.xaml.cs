@@ -21,6 +21,7 @@ namespace TPL_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CancellationTokenSource cancelToken = new CancellationTokenSource();
 
         public MainWindow()
         {
@@ -68,6 +69,9 @@ namespace TPL_WPF
         }
         private void Method2()
         {
+            ParallelOptions parallelOptions = new ParallelOptions();
+            parallelOptions.CancellationToken = cancelToken.Token;
+
             //Console.WriteLine("\n ***** Method 2 ***** ");
             Thread t = Thread.CurrentThread;
             ShowThreadInfo("Method 2",lbl_Thread_2_Status ,t);
@@ -78,10 +82,24 @@ namespace TPL_WPF
             //    Thread.Sleep(300);
             //}
 
-            Parallel.For(0, 40, (i) => {
-                AppendToLabel(" " + i, lbl_Thread_2_Status);
-                Thread.Sleep(300);
-            });
+            try
+            {
+                Parallel.For(0, 40, parallelOptions, (i) => {
+                    parallelOptions.CancellationToken.ThrowIfCancellationRequested();
+                    AppendToLabel(" " + i, lbl_Thread_2_Status);
+                    Thread.Sleep(300);
+                });
+                //this.Invoke((Action)delegate 
+                //{
+                //    this.ex
+                //});
+            }
+            catch (OperationCanceledException ex)
+            { 
+                //this.Title = ex.Message;
+            }
+
+
 
         }
 
@@ -110,6 +128,11 @@ namespace TPL_WPF
                 AppendToLabel(" " + i, lbl_Thread_1_Status);
                 Thread.Sleep(300);
             });
+        }
+
+        private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            cancelToken.Cancel();
         }
     }
 }

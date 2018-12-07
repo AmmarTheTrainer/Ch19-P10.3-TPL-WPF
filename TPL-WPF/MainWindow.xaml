@@ -16,6 +16,7 @@
         <Label Name="lbl_Thread_1_Status" Content="Thead 1 Status" HorizontalAlignment="Left" Margin="179,44,0,0" VerticalAlignment="Top"/>
         <Label Name="lbl_Thread_2_Status" Content="Thead 2 Status" HorizontalAlignment="Left" Margin="179,103,0,0" VerticalAlignment="Top"/>
         <Label Name="lbl_Thread_3_Status" Content="Thead 3 Status" HorizontalAlignment="Left" Margin="179,162,0,0" VerticalAlignment="Top"/>
+        <Button Name="btn_Cancel" Click="Btn_Cancel_Click" Content="Cancel" HorizontalAlignment="Left" Margin="192,358,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
