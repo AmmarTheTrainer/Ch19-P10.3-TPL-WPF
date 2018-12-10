@@ -30,20 +30,22 @@ namespace TPL_WPF
 
         private void Btn_StartAllThreads_Click(object sender, RoutedEventArgs e)
         {
-            
             StartAllThreads();
         }
 
         private void StartAllThreads()
         {
-            Task.Factory.StartNew(() => Method1());
-            Task.Factory.StartNew(() => Method2());
 
-            //Task.Run(() => Method1());
-            //Task.Run(() => Method2());
+            //Parallel.Invoke(() => Method1(), () => Method2());
 
-            //ThreadPool.QueueUserWorkItem(StartMethod);
-            //ThreadPool.QueueUserWorkItem(StartMethod2);
+            //Task.Factory.StartNew(() => Method1());
+            //Task.Factory.StartNew(() => Method2());
+
+            Task.Run(() => Method1());
+            Task.Run(() => Method2());
+
+            // ThreadPool.QueueUserWorkItem(StartMethod);
+            // ThreadPool.QueueUserWorkItem(StartMethod2);
 
             //Method1();
             //Method2();
