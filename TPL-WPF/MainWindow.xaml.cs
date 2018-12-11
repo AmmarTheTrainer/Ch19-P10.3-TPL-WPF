@@ -16,6 +16,11 @@ using System.Windows.Shapes;
 
 namespace TPL_WPF
 {
+    class Student
+    {
+        public int ID { get; set; }
+
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
